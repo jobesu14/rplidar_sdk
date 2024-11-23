@@ -9,7 +9,17 @@ set(CMAKE_BUILD_TYPE "Release")
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  add_compile_options(-O2 -Wall -Wextra -Wpedantic -fPIC)
+  add_compile_options(-O2 -Wall -Wextra -Wpedantic -fPIC
+    # silence the unfortunate warnings to clarifying library consumer build logs
+    -Wno-unused-value
+    -Wno-unused-parameter
+    -Wno-pedantic
+    -Wno-stringop-truncation
+    -Wno-ignored-qualifiers
+    -Wno-cast-function-type
+    -Wno-unused-function
+    -Wno-unused-result
+  )
 endif()
 
 if(MSVC)
